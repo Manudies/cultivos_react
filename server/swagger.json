@@ -1,0 +1,605 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Gestión de Usuarios, Comentarios y Cultivos",
+    "description": "Esta es una API para gestionar usuarios, comentarios y cultivos en una aplicación web.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Obtiene todos los usuarios",
+        "description": "Retorna una lista de todos los usuarios registrados en el sistema.",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna la lista de usuarios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea un nuevo usuario",
+        "description": "Crea un nuevo usuario con la información proporcionada en el cuerpo de la solicitud.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del usuario creado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Obtiene un usuario por su ID",
+        "description": "Retorna un usuario específico según su ID.",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del usuario a obtener.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del usuario solicitado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualiza un usuario por su ID",
+        "description": "Actualiza los datos de un usuario existente según su ID.",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del usuario a actualizar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del usuario actualizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina un usuario por su ID",
+        "description": "Elimina un usuario existente según su ID.",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del usuario a eliminar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del usuario eliminado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments": {
+      "get": {
+        "summary": "Obtiene todos los comentarios",
+        "description": "Retorna una lista de todos los comentarios registrados en el sistema.",
+        "tags": [
+          "Comment"
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna la lista de comentarios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Comment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea un nuevo comentario",
+        "description": "Crea un nuevo comentario con la información proporcionada en el cuerpo de la solicitud.",
+        "tags": [
+          "Comment"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del comentario creado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "summary": "Obtiene un comentario por su ID",
+        "description": "Retorna un comentario específico según su ID.",
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del comentario a obtener.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del comentario solicitado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualiza un comentario por su ID",
+        "description": "Actualiza los datos de un comentario existente según su ID.",
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del comentario a actualizar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del comentario actualizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina un comentario por su ID",
+        "description": "Elimina un comentario existente según su ID.",
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del comentario a eliminar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del comentario eliminado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cultivations": {
+      "get": {
+        "summary": "Obtiene todos los cultivos",
+        "description": "Retorna una lista de todos los cultivos registrados en el sistema.",
+        "tags": [
+          "Cultivation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna la lista de cultivos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Cultivation"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea un nuevo cultivo",
+        "description": "Crea un nuevo cultivo con la información proporcionada en el cuerpo de la solicitud.",
+        "tags": [
+          "Cultivation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CultivationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del cultivo creado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cultivation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cultivations/{id}": {
+      "get": {
+        "summary": "Obtiene un cultivo por su ID",
+        "description": "Retorna un cultivo específico según su ID.",
+        "tags": [
+          "Cultivation"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del cultivo a obtener.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del cultivo solicitado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cultivation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualiza un cultivo por su ID",
+        "description": "Actualiza los datos de un cultivo existente según su ID.",
+        "tags": [
+          "Cultivation"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del cultivo a actualizar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CultivationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del cultivo actualizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cultivation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina un cultivo por su ID",
+        "description": "Elimina un cultivo existente según su ID.",
+        "tags": [
+          "Cultivation"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del cultivo a eliminar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exitoso. Retorna los datos del cultivo eliminado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cultivation"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID del usuario."
+          },
+          "name": {
+            "type": "string",
+            "description": "Nombre del usuario."
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electrónico del usuario."
+          },
+          "role": {
+            "type": "string",
+            "description": "Rol del usuario (admin, user)."
+          }
+        }
+      },
+      "UserInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre del usuario."
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electrónico del usuario."
+          },
+          "password": {
+            "type": "string",
+            "description": "Contraseña del usuario."
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID del comentario."
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID del usuario que realizó el comentario."
+          },
+          "content": {
+            "type": "string",
+            "description": "Contenido del comentario."
+          }
+        }
+      },
+      "CommentInput": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ID del usuario que realiza el comentario."
+          },
+          "content": {
+            "type": "string",
+            "description": "Contenido del comentario."
+          }
+        }
+      },
+      "Cultivation": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID del cultivo."
+          },
+          "name": {
+            "type": "string",
+            "description": "Nombre del cultivo."
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de cultivo."
+          },
+          "location": {
+            "type": "string",
+            "description": "Ubicación del cultivo."
+          }
+        }
+      },
+      "CultivationInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre del cultivo."
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de cultivo."
+          },
+          "location": {
+            "type": "string",
+            "description": "Ubicación del cultivo."
+          }
+        }
+      }
+    }
+  }
+}
