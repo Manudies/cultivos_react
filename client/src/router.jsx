@@ -1,20 +1,20 @@
 import {createBrowserRouter,redirect} from "react-router-dom";
-import { getProjects,getProject } from "./utils/fetch";
+import { getCultivations,getCultivation } from "./utils/fetch";
 import Root from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
 import Register from "./pages/register/Register";
-import ProjectsList from "./pages/project/ProjectsList";
-import Project from "./pages/project/Project";
+import CultivationsList from "./pages/cultivation/CultivationsList";
+import Cultivation from "./pages/cultivation/Cultivation";
 
-async function fetchProjects(){
-    const result = await getProjects();
+async function fetchCultivations(){
+    const result = await getCultivations();
     if(result.error){
         return redirect("/register");
     }
     return result.data;
 }
-async function fetchProject(id){
-    const result = await getProject(id);
+async function fetchCultivation(id){
+    const result = await getCultivation(id);
     if(result.error){
         return redirect("/register");
     }
@@ -29,17 +29,17 @@ const router = createBrowserRouter([
       children: [
         {
             path: "/",
-            element: <h2>Welcome to Q-trello</h2>
+            element: <h2>Bienvenido a Cultivos</h2>
         },
         {
-            path: "/projects",
-            element: <ProjectsList />,
-            loader: () => fetchProjects()
+            path: "/cultivations",
+            element: <CultivationsList />,
+            loader: () => fetchCultivations()
         },
         {
-            path: "/projects/:id",
-            element: <Project />,
-            loader: ({params}) => fetchProject(params.id)
+            path: "/cultivations/:id",
+            element: <Cultivation />,
+            loader: ({params}) => fetchCultivation(params.id)
         },
       ]
     },

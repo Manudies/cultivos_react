@@ -30,11 +30,13 @@ const Root = () => {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/projects">Projects</Link>
+                        <Link to="/cultivations">Cultivos</Link>
                     </li>
-                    <li>
-                        <Link to="/register">Login / Register </Link>
-                    </li>
+                    {!user && (
+                        <li>
+                            <Link to="/register">Login / Register</Link>
+                        </li>
+                        )}
                 </ul>
             </nav>
             <h1>Hola {user?.username}</h1>

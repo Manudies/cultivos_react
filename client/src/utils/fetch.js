@@ -44,24 +44,36 @@ const getUserData = async()=>{
     const result = await fetchData("/users/bytoken","get");
     return result;
 }
-const getProjects = async()=>{
-    const result = await fetchData("/projects","get");
+const getCultivations = async()=>{
+    const result = await fetchData("/cultivations","get");
+    console.log("getCultivations",result);
     return result;
 }
-const getProject = async(id)=>{
-    const result = await fetchData("/projects/"+id,"get");
+const getCultivation = async(id)=>{
+    const result = await fetchData("/cultivations/"+id,"get");
     return result;
 }
-const createProject = async(projectData)=>{
-    const result = await fetchData("/projects","post",projectData);
+const createCultivation = async(cultivationData)=>{
+    const result = await fetchData("/cultivations","post",cultivationData);
+    return result;
+}
+
+const removeCultivation = async(id)=>{
+    const result = await fetchData("/cultivations/"+id,"delete");
+    return result;
+}
+const updateCultivation = async(id,cultivationData)=>{
+    const result = await fetchData("/cultivations/"+id,"put",cultivationData);
     return result;
 }
 
 export {
     register,
     login,
-    getProjects,
-    getProject,
-    createProject,
-    getUserData
+    getCultivations,
+    getCultivation,
+    createCultivation,
+    getUserData,
+    removeCultivation,
+    updateCultivation
 }
