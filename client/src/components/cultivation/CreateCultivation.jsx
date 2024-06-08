@@ -1,35 +1,58 @@
-import { createCultivation } from "../../utils/fetch";
-import "./CreateCultivation.css"
-const CreateCultivation = ({onCreate})=>{
+import React, { useState, useEffect } from 'react';
+import { createCultivation, updateCultivation } from "../../utils/fetch";
+import "./CreateCultivation.css";
 
-    const handleSubmit = async (e)=>{
+const CreateCultivation = ({ onCreate, onUpdate, initialData }) => {
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [seedtime, setSeedtime] = useState('summer');
+
+    useEffect(() => {
+        if (initialData) {
+            setName(initialData.name);
+            setDescription(initialData.description);
+            setSeedtime(initialData.seedtime);
+        }
+    }, [initialData]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const name = e.target.name.value;
-        const description = e.target.description.value;
-        const seedtime = e.target.seedtime.value;
-        const data = {name,description,seedtime };
-        console.log("Cultivo",data)
-        const result = await createCultivation(data);
-       
+        const data = { name, description, seedtime };
+        console.log("Cultivo", data);
+        try {
+            let result;
+            if (initialData) {
+                result = await updateCultivation(initialData._id, data);
+                onUpdate(result);
+            } else {
+                result = await createCultivation(data);
+                onCreate(result);
+            }
+            console.log("result", result);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
-        console.log("result",result)
-        onCreate(result);
-    }
     return (
-        <form action="" className="create-cultivation" onSubmit={handleSubmit}>
-            <label htmlFor="name" >Name</label>
-            <input type="text" name="name"/>
-            <label htmlFor="description" >Description</label>
-            <textarea name="description"></textarea>
-            <label htmlFor="seedtime" >Seedtime</label>
-            <select name="seedtime" >
-                <option value="spring">spring</option>
-                <option value="summer" selected>summer</option>
-                <option value="fall">fall</option>
-                <option value="winter">winter</option>
+        <form className="create-cultivation" onSubmit={handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+
+            <label htmlFor="description">Description</label>
+            <textarea name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+
+            <label htmlFor="seedtime">Seedtime</label>
+            <select name="seedtime" id="seedtime" value={seedtime} onChange={(e) => setSeedtime(e.target.value)}>
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+                <option value="fall">Fall</option>
+                <option value="winter">Winter</option>
             </select>
-            <button type="submit">Create</button>
+
+            <button type="submit">{initialData ? 'Update' : 'Create'}</button>
         </form>
-    )
+    );
 }
+
 export default CreateCultivation;
