@@ -9,7 +9,7 @@ const CultivationsList = () => {
         return (
             <article className="cultivation-list-element" key={cultivation._id}>
                 <h2>{cultivation.name}</h2>
-                <Link to={`/cultivations/${cultivation._id}`}>View</Link>
+                <Link className="link_view" to={`/cultivations/${cultivation._id}`}>Ver cultivo</Link>
             </article>
         )
     })
@@ -20,7 +20,7 @@ const CultivationsList = () => {
                 <CreateCultivation onCreate={()=>setCreatingCultivation(false)}/>
             </Modal>
             :
-            <button onClick={()=>setCreatingCultivation(true)}>New Cultivation</button>
+            <button onClick={()=>setCreatingCultivation(true)}>Crear cultivo</button>
         }
             <section className="cultivation-list">
                 {cultivationsHtml}

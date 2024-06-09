@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { removeCultivation } from "../../utils/fetch";
 import CreateCultivation from "../../components/cultivation/CreateCultivation";
 import Modal from "../../components/modal/Modal";
-// import "./Cultivations.css";
+import "./Cultivations.css";
 
 const Cultivation = () => {
     const [cultivation, setCultivation] = useState(useLoaderData());
