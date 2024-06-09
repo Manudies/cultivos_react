@@ -1,0 +1,5 @@
+
+form.create-cultivation{
+    display: flex;
+    flex-direction: column;
+}
