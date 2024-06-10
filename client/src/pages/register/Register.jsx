@@ -62,30 +62,34 @@ const Register = ({ onLogin }) => {
         }
     }
     return (
-        <section className="register-login">
-            <h2>{isRegister ? "Register" : "Login"}</h2>
-            {error}
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
-                <input name="username" type="text" value={userData.username} onChange={handleUserData} />
-                {isRegister &&
-                    <>
-                    <label htmlFor="email">Email</label>
-                    <input name="email" type="email" value={userData.email} onChange={handleUserData} />
-                    </>
-                }
-                <label htmlFor="password">Password</label>
-                <input name="password" type="password" value={userData.password} onChange={handleUserData} />
-                {isRegister &&
-                    <>
-                        <label htmlFor="passwordRepeat">Repeat Password</label>
-                        <input name="passwordRepeat" type="password" value={userData.passwordRepeat} onChange={handleUserData} />
-                    </>
-                }
-                <button>{isRegister ? "Register" : "Login"}</button>
-            </form>
-            <button onClick={() => setIsRegister(register => !register)} >{isRegister ? "Go to Login" : "Go to Register"}</button>
-        </section>
+        <div>
+            <h2>Welcome to Cultivos</h2>
+            <section className="register-login">
+                <h2>{isRegister ? "Register" : "Login"}</h2>
+                {error}
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">Username</label>
+                    <input name="username" type="text" value={userData.username} onChange={handleUserData} />
+                    {isRegister &&
+                        <>
+                        <label htmlFor="email">Email</label>
+                        <input name="email" type="email" value={userData.email} onChange={handleUserData} />
+                        </>
+                    }
+                    <label htmlFor="password">Password</label>
+                    <input name="password" type="password" value={userData.password} onChange={handleUserData} />
+                    {isRegister &&
+                        <>
+                            <label htmlFor="passwordRepeat">Repeat Password</label>
+                            <input name="passwordRepeat" type="password" value={userData.passwordRepeat} onChange={handleUserData} />
+                        </>
+                    }
+                    <button>{isRegister ? "Register" : "Login"}</button>
+                </form>
+                <button onClick={() => setIsRegister(register => !register)} >{isRegister ? "Go to Login" : "Go to Register"}</button>
+            </section>
+        
+        </div>
     )
 }
 
